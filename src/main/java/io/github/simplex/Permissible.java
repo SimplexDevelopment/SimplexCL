@@ -5,14 +5,12 @@ import org.bukkit.command.CommandSender;
 public abstract class Permissible {
     private final String permission;
     private final String permissionMessage;
+    private final boolean allowConsole;
 
-    public Permissible(String permission, String permissionMessage) {
+    public Permissible(String permission, String permissionMessage, boolean allowConsole) {
         this.permission = permission;
         this.permissionMessage = permissionMessage;
-    }
-
-    public Permissible(String permission) {
-        this(permission, "You do not have permission to use this command.");
+        this.allowConsole = allowConsole;
     }
 
     public String getPermission() {
@@ -25,5 +23,9 @@ public abstract class Permissible {
 
     public boolean hasPermission(CommandSender sender) {
         return sender.hasPermission(getPermission());
+    }
+
+    public boolean allowConsole() {
+        return allowConsole;
     }
 }

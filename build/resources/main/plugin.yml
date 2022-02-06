@@ -1,0 +1,8 @@
+name: SimplexCL
+version: '${project.version}'
+main: io.github.simplex.SimplexCL
+api-version: 1.18
+prefix: CommandLoader
+authors: [ SimplexDevelopment ]
+description: A Command Loader for Paper
+website: https://simplexdev.app

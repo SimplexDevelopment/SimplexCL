@@ -1,26 +1,29 @@
 package io.github.simplex;
 
 import io.github.simplex.api.ICommand;
-import io.github.simplex.api.annotations.Permission;
+import io.github.simplex.api.annotations.SubCommand;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.util.RGBLike;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.defaults.BukkitCommand;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class CommandBase extends Permissible implements ICommand {
-    private final Plugin plugin;
-
-    public CommandBase(Plugin plugin, String permission, String permissionMessage) {
-        super(permission, permissionMessage);
-        this.plugin = plugin;
+    public CommandBase(String permission, String permissionMessage, boolean allowConsole) {
+        super(permission, permissionMessage, allowConsole);
     }
 
-    public CommandBase(Plugin plugin, String permission) {
-        this(plugin, permission, "You do not have permission to use this command.");
+    public CommandBase(String permission, String permissionMessage) {
+        this(permission, permissionMessage, true);
     }
 
     @Override
@@ -32,7 +35,21 @@ public abstract class CommandBase extends Permissible implements ICommand {
                     .color(TextColor.color(255, 3, 62)));
             return true;
         }
-        execute();
+
+        if (!(sender instanceof Player) && !allowConsole()) {
+            sender.sendMessage(Component.empty().content("This command may only be run in game."));
+        }
+
+        execute(sender, args, allowConsole());
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+        return new ArrayList<>();
+    }
+
+    public TextComponent msg(String text) {
+        return Component.empty().content(text);
     }
 }

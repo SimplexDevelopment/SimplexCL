@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface Permission {
     String permission();
     String permissionMessage() default "You do not have permission to use this command!";
+    boolean allowConsole() default true;
 }

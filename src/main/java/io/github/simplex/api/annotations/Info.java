@@ -11,7 +11,5 @@ public @interface Info {
     String name();
     String description();
     String usage();
-    String permission();
     String aliases() default "";
-    String permissionMessage() default "You do not have permission to use this command.";
 }
