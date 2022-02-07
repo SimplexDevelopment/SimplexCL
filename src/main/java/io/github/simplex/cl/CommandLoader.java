@@ -1,34 +1,29 @@
-package io.github.simplex;
+package io.github.simplex.cl;
 
-import io.github.simplex.api.annotations.*;
+import io.github.simplex.cl.api.annotations.Info;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.reflections.Reflections;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Set;
 
-public class CommandLoader<T extends CommandBase> {
+public class CommandLoader {
     private final Plugin plugin;
 
     public CommandLoader(Plugin plugin) {
         this.plugin = plugin;
     }
 
-    public void registerCommands(Class<T> target) {
-        Reflections reflections = new Reflections(target);
-        if (target.getDeclaredAnnotation(Info.class) != null) {
+    public <T extends CommandBase> void registerCommands(Class<T> commandRoot) {
+        Reflections reflections = new Reflections(commandRoot);
+        if (commandRoot.getDeclaredAnnotation(Info.class) != null) {
             Set<Class<?>> classSet = reflections.getTypesAnnotatedWith(Info.class);
             classSet.forEach(cmd -> {
                 Info info = cmd.getDeclaredAnnotation(Info.class);
-                Permission permission = cmd.getDeclaredAnnotation(Permission.class);
                 try {
-                    CommandBase base = (CommandBase) cmd.getConstructor(String.class,
-                            String.class,
-                            Boolean.class)
-                            .newInstance(permission.permission(),
-                                    permission.permissionMessage(),
-                                    permission.allowConsole());
+                    CommandBase base = (CommandBase) cmd.getConstructor().newInstance();
                     DummyCommand dummy = new DummyCommand(plugin,
                             base,
                             info.name(),
