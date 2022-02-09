@@ -18,7 +18,11 @@ public enum BasicColors {
     PURPLE(TextColor.color(255, 0, 255)),
     DARK_PURPLE(TextColor.color(127, 0, 127)),
     PINK(TextColor.color(255, 105, 180)),
-    DARK_PINK(TextColor.color(231, 84, 128));
+    DARK_PINK(TextColor.color(231, 84, 128)),
+    WHITE(TextColor.color(255, 255, 255)),
+    BLACK(TextColor.color(0, 0, 0)),
+    LIGHT_GRAY(TextColor.color(127, 127, 127)),
+    DARK_GRAY(TextColor.color(65, 65, 65));
 
     final TextColor color;
 

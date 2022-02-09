@@ -1,7 +1,7 @@
 package io.github.simplex.cl;
 
-import io.github.simplex.api.ICommand;
-import io.github.simplex.api.SubCommand;
+import io.github.simplex.cl.api.ICommand;
+import io.github.simplex.cl.api.SubCommand;
 import io.github.simplex.msgutils.AdvancedColors;
 import io.github.simplex.msgutils.BasicColors;
 import net.kyori.adventure.text.Component;
@@ -19,19 +19,35 @@ import java.util.List;
 import java.util.UUID;
 
 public abstract class CommandBase extends Permissible implements ICommand {
-    public CommandBase(String permission, String permissionMessage, boolean allowConsole) {
+    /**
+     * @param permission        The permission the user should have to run the command
+     * @param permissionMessage The message to send when the user does not have the permission to run the command.
+     * @param allowConsole      Whether to allow the command to be run anywhere, or only in game.
+     */
+    public CommandBase(@NotNull String permission, String permissionMessage, boolean allowConsole) {
         super(permission, permissionMessage, allowConsole);
     }
 
-    public CommandBase(String permission, String permissionMessage) {
+    /**
+     * @param permission        The permission the user should have to run the command
+     * @param permissionMessage The message to send when the user does not have the permission to run the command.
+     */
+    public CommandBase(@NotNull String permission, String permissionMessage) {
         this(permission, permissionMessage, true);
     }
 
-    public CommandBase(String permission, boolean allowConsole) {
+    /**
+     * @param permission   The permission the user should have to run the command
+     * @param allowConsole Whether to allow the command to be run anywhere, or only in game.
+     */
+    public CommandBase(@NotNull String permission, boolean allowConsole) {
         this(permission, "You do not have permission to use this command!", allowConsole);
     }
 
-    public CommandBase(String permission) {
+    /**
+     * @param permission The permission the user should have to run the command
+     */
+    public CommandBase(@NotNull String permission) {
         this(permission, "You do not have permission to use this command!", true);
     }
 
@@ -55,29 +71,100 @@ public abstract class CommandBase extends Permissible implements ICommand {
         return new ArrayList<>();
     }
 
-    public TextComponent msg(String text) {
+    /**
+     * Returns a text component for Kyori friendly messaging.
+     *
+     * @param text The text to convert to a component
+     * @return A {@link TextComponent} containing the message provided in {@param text}
+     */
+    @NotNull
+    public TextComponent msg(@NotNull String text) {
         return Component.empty().content(text);
     }
 
-    public TextComponent msg(String text, BasicColors color) {
+    /**
+     * Returns a text component for Kyori friendly messaging.
+     *
+     * @param text  The text to convert to a Component
+     * @param color The color you'd like the text. These colors are basic and the majority of which are provided by Minecraft's native color system.
+     * @return A {@link TextComponent} containing the message provided in {@param text} with the provided {@param color}
+     */
+    @NotNull
+    public TextComponent msg(@NotNull String text, @NotNull BasicColors color) {
         return Component.empty().content(text).color(color.getColor());
     }
 
-    public TextComponent msg(String text, AdvancedColors color) {
+    /**
+     * Returns a text component for Kyori friendly messaging.
+     *
+     * @param text  The text to convert to a Component
+     * @param color The color you'd like the text. These colors are much more diverse for viewing pleasure.
+     * @return A {@link TextComponent} containing the message provided in {@param text} with the provided {@param color}
+     */
+    @NotNull
+    public TextComponent msg(@NotNull String text, @NotNull AdvancedColors color) {
         return Component.empty().content(text).color(color.getColor());
     }
 
-    public void subCommand(String name, String[] args, SubCommand command) {
-        if (args[0].equalsIgnoreCase(name)) {
-            command.execute();
+    /**
+     * Runs a subcommand provided that the user has the required permission.
+     *
+     * @param name       The name of the subcommand.
+     * @param sender     The user who executed the command. (Provided by Paper)
+     * @param permission The permission required to run the subcommand.
+     * @param args       The arguments the user input to run the subcommand. (Provided by Paper)
+     * @param command    The SubCommand to run.
+     *                   This is a functional interface to provide easy implementation of the command's details.
+     */
+    public void subCommand(@NotNull String name, @NotNull CommandSender sender, @NotNull String permission, String @NotNull [] args, @NotNull SubCommand command) {
+        if (!sender.hasPermission(permission)) {
+            sender.sendMessage(msg(getPermissionMessage()));
+            return;
+        }
+
+        if (args.length == 0) {
+            return;
+        }
+
+        String[] tieredCmd = name.split(" ");
+
+        if (args.length == 1 && tieredCmd.length == 1) {
+            if (args[0].equalsIgnoreCase(name)) {
+                command.execute();
+                return;
+            }
+        }
+        if (args.length == 2 && tieredCmd.length == 2) {
+            if (args[0].equalsIgnoreCase(tieredCmd[0]) && args[1].equalsIgnoreCase(tieredCmd[1])) {
+                command.execute();
+                return;
+            }
+        }
+        if (args.length == 3 && tieredCmd.length == 3) {
+            if (args[0].equalsIgnoreCase(tieredCmd[0])
+                    && args[1].equalsIgnoreCase(tieredCmd[1])
+                    && args[2].equalsIgnoreCase(tieredCmd[2])) {
+                command.execute();
+                return;
+            }
+        }
+        if (args.length == 4 && tieredCmd.length == 4) {
+            if (args[0].equalsIgnoreCase(tieredCmd[0])
+                    && args[1].equalsIgnoreCase(tieredCmd[1])
+                    && args[2].equalsIgnoreCase(tieredCmd[2])
+                    && args[3].equalsIgnoreCase(tieredCmd[3])) {
+                command.execute();
+            }
         }
     }
 
-    public Player getPlayer(String name) {
+    @Nullable
+    public Player getPlayer(@NotNull String name) {
         return Bukkit.getServer().getPlayer(name);
     }
 
-    public Player getPlayer(UUID uuid) {
+    @Nullable
+    public Player getPlayer(@NotNull UUID uuid) {
         return Bukkit.getServer().getPlayer(uuid);
     }
 
