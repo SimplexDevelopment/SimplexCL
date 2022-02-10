@@ -16,13 +16,13 @@ public final class ExampleCommand extends CommandBase {
 
     @Override
     public void execute(CommandSender sender, String[] args, boolean allowConsole) {
-        subCommand("info", sender, getPermission() + ".info", args, () -> {
-            sender.sendMessage(msg("SimplexCL was created by SimplexDevelopment!", BasicColors.GOLD));
-        });
+        if (subCommand("info", sender, getPermission() + ".info", args, () -> sender.sendMessage(msg("SimplexCL was created by SimplexDevelopment!", BasicColors.GOLD)))) {
+            return;
+        }
 
-        subCommand("info more", sender, getPermission() + ".info.more", args, () -> {
-            sender.sendMessage(msg("https://github.com/SimplexDevelopment", AdvancedColors.FUCHSIA));
-        });
+        if (subCommand("info more", sender, getPermission() + ".info.more", args, () -> sender.sendMessage(msg("https://github.com/SimplexDevelopment", AdvancedColors.FUCHSIA)))) {
+            return;
+        }
 
         sender.sendMessage(msg("This is an example command.", BasicColors.BLUE));
     }

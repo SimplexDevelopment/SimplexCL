@@ -116,14 +116,14 @@ public abstract class CommandBase extends Permissible implements ICommand {
      * @param command    The SubCommand to run.
      *                   This is a functional interface to provide easy implementation of the command's details.
      */
-    public void subCommand(@NotNull String name, @NotNull CommandSender sender, @NotNull String permission, String @NotNull [] args, @NotNull SubCommand command) {
+    public boolean subCommand(@NotNull String name, @NotNull CommandSender sender, @NotNull String permission, String @NotNull [] args, @NotNull SubCommand command) {
         if (!sender.hasPermission(permission)) {
             sender.sendMessage(msg(getPermissionMessage()));
-            return;
+            return true;
         }
 
         if (args.length == 0) {
-            return;
+            return false;
         }
 
         String[] tieredCmd = name.split(" ");
@@ -131,13 +131,13 @@ public abstract class CommandBase extends Permissible implements ICommand {
         if (args.length == 1 && tieredCmd.length == 1) {
             if (args[0].equalsIgnoreCase(name)) {
                 command.execute();
-                return;
+                return true;
             }
         }
         if (args.length == 2 && tieredCmd.length == 2) {
             if (args[0].equalsIgnoreCase(tieredCmd[0]) && args[1].equalsIgnoreCase(tieredCmd[1])) {
                 command.execute();
-                return;
+                return true;
             }
         }
         if (args.length == 3 && tieredCmd.length == 3) {
@@ -145,7 +145,7 @@ public abstract class CommandBase extends Permissible implements ICommand {
                     && args[1].equalsIgnoreCase(tieredCmd[1])
                     && args[2].equalsIgnoreCase(tieredCmd[2])) {
                 command.execute();
-                return;
+                return true;
             }
         }
         if (args.length == 4 && tieredCmd.length == 4) {
@@ -154,8 +154,10 @@ public abstract class CommandBase extends Permissible implements ICommand {
                     && args[2].equalsIgnoreCase(tieredCmd[2])
                     && args[3].equalsIgnoreCase(tieredCmd[3])) {
                 command.execute();
+                return true;
             }
         }
+        return false;
     }
 
     @Nullable
