@@ -1,4 +1,4 @@
-package io.github.simplex.cl;
+package io.github.simplexdevelopment.cl;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;

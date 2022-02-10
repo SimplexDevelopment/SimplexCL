@@ -1,4 +1,4 @@
-package io.github.simplex.cl.api;
+package io.github.simplexdevelopment.cl.api;
 
 @FunctionalInterface
 public interface SubCommand {

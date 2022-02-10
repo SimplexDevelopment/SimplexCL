@@ -1,6 +1,6 @@
-package io.github.simplex.cl;
+package io.github.simplexdevelopment.cl;
 
-import io.github.simplex.cl.api.annotations.Info;
+import io.github.simplexdevelopment.cl.api.annotations.Info;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 

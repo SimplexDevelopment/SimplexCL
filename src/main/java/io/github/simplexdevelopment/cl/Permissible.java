@@ -1,4 +1,4 @@
-package io.github.simplex.cl;
+package io.github.simplexdevelopment.cl;
 
 import org.bukkit.command.CommandSender;
 

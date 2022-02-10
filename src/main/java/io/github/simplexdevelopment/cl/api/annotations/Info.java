@@ -1,4 +1,4 @@
-package io.github.simplex.cl.api.annotations;
+package io.github.simplexdevelopment.cl.api.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

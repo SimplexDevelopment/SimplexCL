@@ -1,9 +1,9 @@
-package io.github.simplex.cl.impl;
+package io.github.simplexdevelopment.cl.impl;
 
-import io.github.simplex.cl.CommandBase;
-import io.github.simplex.cl.api.annotations.Info;
-import io.github.simplex.msgutils.AdvancedColors;
-import io.github.simplex.msgutils.BasicColors;
+import io.github.simplexdevelopment.cl.CommandBase;
+import io.github.simplexdevelopment.cl.api.annotations.Info;
+import io.github.simplexdevelopment.msgutils.AdvancedColors;
+import io.github.simplexdevelopment.msgutils.BasicColors;
 import org.bukkit.command.CommandSender;
 
 @Info(name = "example", description = "An example command implementation to see how this works.", usage = "/example [info]", aliases = "ex, impl")

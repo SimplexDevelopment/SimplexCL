@@ -1,4 +1,4 @@
-package io.github.simplex.msgutils;
+package io.github.simplexdevelopment.msgutils;
 
 import net.kyori.adventure.text.format.TextColor;
 

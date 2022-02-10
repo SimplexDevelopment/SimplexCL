@@ -1,9 +1,9 @@
-package io.github.simplex.cl;
+package io.github.simplexdevelopment.cl;
 
-import io.github.simplex.cl.api.ICommand;
-import io.github.simplex.cl.api.SubCommand;
-import io.github.simplex.msgutils.AdvancedColors;
-import io.github.simplex.msgutils.BasicColors;
+import io.github.simplexdevelopment.cl.api.ICommand;
+import io.github.simplexdevelopment.cl.api.SubCommand;
+import io.github.simplexdevelopment.msgutils.AdvancedColors;
+import io.github.simplexdevelopment.msgutils.BasicColors;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
