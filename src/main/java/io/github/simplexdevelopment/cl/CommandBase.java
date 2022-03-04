@@ -62,7 +62,7 @@ public abstract class CommandBase extends Permissible implements ICommand {
             sender.sendMessage(msg("This command can only be run in game."));
         }
 
-        execute(sender, args, allowConsole());
+        execute(sender, args);
         return true;
     }
 
