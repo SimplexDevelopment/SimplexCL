@@ -10,7 +10,6 @@ public interface ICommand extends CommandExecutor, TabCompleter {
      *
      * @param sender       The user who sent the command. (Provided by Paper)
      * @param args         The additional arguments to the command, if applicable (Provided by Paper)
-     * @param allowConsole Whether the command should be allowed anywhere, or only in game.
      */
     void execute(CommandSender sender, String[] args);
 }

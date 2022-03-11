@@ -28,3 +28,6 @@ gradle.properties
 build/*
 .gradle/*
 .idea/*
+.gradle/7.2/executionHistory/executionHistory.bin
+*.bin
+*.lock

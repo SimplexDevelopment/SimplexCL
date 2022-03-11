@@ -16,7 +16,11 @@ public final class ExampleCommand extends CommandBase {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (subCommand("info", sender, getPermission() + ".info", args, () -> sender.sendMessage(msg("SimplexCL was created by SimplexDevelopment!", BasicColors.GOLD)))) {
+        if (subCommand("info",
+                sender,
+                getPermission() + ".info",
+                args,
+                () -> sender.sendMessage(msg("SimplexCL was created by SimplexDevelopment!", BasicColors.GOLD)))) {
             return;
         }
 

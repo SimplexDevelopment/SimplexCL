@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public final class DummyCommand extends Command implements PluginIdentifiableCommand {
+final class DummyCommand extends Command implements PluginIdentifiableCommand {
     private final CommandBase base;
     private final Plugin plugin;
 
