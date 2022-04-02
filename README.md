@@ -4,7 +4,7 @@ This is an abstracted command system designed to make Paper's default command lo
 
 To use this in your plugin, simply add the following to your build.gradle:
 
-```Groovy
+```Gradle
 plugins {
   id "com.github.johnrengelman.shadow" version "7.1.2"
 }
