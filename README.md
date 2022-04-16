@@ -4,21 +4,19 @@ This is an abstracted command system designed to make Paper's default command lo
 
 To use this in your plugin, simply add the following to your build.gradle:
 
-<code>
+```Gradle
 plugins {
   id "com.github.johnrengelman.shadow" version "7.1.2"
 }
-</code>
-<code>
+
 repositories {
     maven {
         name = 'sonatype'
         url = 'https://s01.oss.sonatype.org/content/groups/public/'
     }
 }
-</code>
-<code>
+
 dependencies {
     shadow 'io.github.simplexdevelopment:SimplexCL:1.0.0'
 }
-</code>
+```
