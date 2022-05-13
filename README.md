@@ -17,6 +17,6 @@ repositories {
 }
 
 dependencies {
-    shadow 'io.github.simplexdevelopment:SimplexCL:1.0.0'
+    shadow 'io.github.simplexdevelopment:SimplexCL:1.1.0'
 }
 ```
